@@ -17,8 +17,8 @@ const App = () => {
 
   const navItems = [
     { name: "Home", to: "/home" },
-    { name: "Add Workout", to: "/add-workout" },
-    { name: "View Workout", to: "/view-workouts" },
+    { name: "Workout", to: "/workouts" },
+
   ];
 
   // The outer div is necessary as the component must return a single element.

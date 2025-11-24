@@ -1,15 +1,19 @@
 import { List, Trash2, Edit } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext.jsx";
 
 const ViewWorkout = () => {
-  const [workouts, setWorkouts] = useState([]);
+  // const [workouts, setWorkouts] = useState([]);
+  const { workouts, dispatch } = useWorkoutsContext();
+
 
   useEffect(() => {
     const fetchWorkouts = async () => {
       const response = await fetch("/api/workouts");
       const data = await response.json();
       if (response.ok) {
-        setWorkouts(data);
+        // setWorkouts(data);
+        dispatch({ type: "SET_WORKOUTS", payload: data });
       }
     };
     fetchWorkouts();
@@ -17,9 +21,9 @@ const ViewWorkout = () => {
 
   return (
     // Outer container for full-screen centering
-    <div className="min-h-screen flex items-start justify-center py-12 bg-gray-50 px-4 md:px-0">
+    <div className="min-h-screen flex items-start justify-center py-12 bg-white px-4 md:px-0">
       {/* Main content container */}
-      <div className="max-w-xl w-full mt-20">
+      <div className="max-w-xl w-full">
         {/* Main Header */}
         <h2 className="text-3xl font-bold text-gray-900 mb-8 flex items-center">
           <List className="w-8 h-8 mr-3 text-blue-600" />

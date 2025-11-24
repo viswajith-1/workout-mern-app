@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Dumbbell } from 'lucide-react';
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext.jsx';
 
 const AddWorkout = () => {
+  const {dispatch} = useWorkoutsContext();
   const [title, setTitle] = useState('');
   const [load, setLoad] = useState('');
   const [reps, setReps] = useState('');
@@ -26,6 +28,7 @@ const AddWorkout = () => {
       setError(null);
       alert('Workout added successfully!');
       console.log('New workout added successfully.', workout);
+      dispatch({ type: 'ADD_WORKOUT', payload: workout });
 
     }
     else {
@@ -38,7 +41,7 @@ const AddWorkout = () => {
 
   
   return (
-    <div className="min-h-screen flex items-center justify-center py-12">
+    <div className="min-h-screen flex items-start justify-center py-5">
       <div className="max-w-md w-full p-8 bg-white">
         <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
           <Dumbbell className="w-8 h-8 mr-3 text-blue-600" />
