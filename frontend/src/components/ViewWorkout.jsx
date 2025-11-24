@@ -27,6 +27,7 @@ const ViewWorkout = () => {
     if (response.ok) {
       dispatch({ type: "DELETE_WORKOUT", payload: data });
     }
+    alert('Workout deleted successfully!');
   };
 
   return (

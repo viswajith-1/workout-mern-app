@@ -21,14 +21,16 @@ const AddWorkout = () => {
       body: JSON.stringify(workout)
     });
 
+    const json = await response.json();
+
     if (response.ok) {
       setTitle('');
       setLoad('');
       setReps('');
       setError(null);
       alert('Workout added successfully!');
-      console.log('New workout added successfully.', workout);
-      dispatch({ type: 'ADD_WORKOUT', payload: workout });
+      console.log('New workout added successfully.', json);
+      dispatch({ type: 'ADD_WORKOUT', payload: json });
 
     }
     else {
