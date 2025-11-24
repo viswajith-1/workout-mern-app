@@ -6,7 +6,6 @@ const ViewWorkout = () => {
   // const [workouts, setWorkouts] = useState([]);
   const { workouts, dispatch } = useWorkoutsContext();
 
-
   useEffect(() => {
     const fetchWorkouts = async () => {
       const response = await fetch("/api/workouts");
@@ -18,6 +17,17 @@ const ViewWorkout = () => {
     };
     fetchWorkouts();
   }, []);
+
+  const handleDelete = async (id) => {
+    console.log("Deleting workout with ID:",id);
+    const response = await fetch('/api/workouts/'+ id, {
+      method: "DELETE",
+    });
+    const data = await response.json();
+    if (response.ok) {
+      dispatch({ type: "DELETE_WORKOUT", payload: data });
+    }
+  };
 
   return (
     // Outer container for full-screen centering
@@ -46,12 +56,12 @@ const ViewWorkout = () => {
             workouts.map((workout) => (
               // Individual workout item
               <div
-                key={workout.id}
+                key={workout._id}
                 className="py-3 flex justify-between items-center px-1"
               >
                 {/* Date - NOW FIRST COLUMN */}
                 <p className="w-2/12 text-center text-sm font-medium text-gray-700">
-                  {new Date(workout.updatedAt).toLocaleDateString("en-US", {
+                  {new Date(workout.createdAt).toLocaleDateString("en-US", {
                     month: "short",
                     day: "numeric",
                   })}
@@ -75,14 +85,14 @@ const ViewWorkout = () => {
                 {/* Action Buttons */}
                 <div className="flex space-x-2 shrink-0 w-1/12 justify-end">
                   <button
-                    onClick={() => alert(`Editing workout ID: ${workout.id}`)}
+                    onClick={() => alert(`Editing workout ID: ${workout._id}`)}
                     className="p-1 text-blue-600 hover:bg-gray-100 rounded-full transition duration-150"
                     aria-label="Edit Workout"
                   >
                     <Edit className="w-4 h-4" />
                   </button>
                   <button
-                    onClick={() => alert(`Deleting workout ID: ${workout.id}`)}
+                    onClick={() => handleDelete(workout._id)}
                     className="p-1 text-red-500 hover:bg-gray-100 rounded-full transition duration-150"
                     aria-label="Delete Workout"
                   >
