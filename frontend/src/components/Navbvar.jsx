@@ -16,8 +16,10 @@ const App = () => {
   };
 
   const navItems = [
-    { name: "Home", to: "/home" },
+    { name: "Home", to: "/" },
     { name: "Workout", to: "/workouts" },
+    { name: "Login", to: "/login" },
+    { name: "Sign Up", to: "/signup" },
 
   ];
 
@@ -92,6 +94,8 @@ const App = () => {
           </div>
         )}
       </nav>
+      {/* Spacer to prevent content overlap due to fixed navbar */}
+      <div className="h-16" />
     </div>
   );
 };
